@@ -1,0 +1,86 @@
+rooms:
+    throne:
+        _description: |
+            A big, lavish throneroom
+        south: 'entryway'
+    entryway:
+        _description: |
+            A big, lavish entryway with purple curtains
+        north: 'throne'
+characters:
+    ukez:
+        _description: |
+            A regal, imposing, and really all-around scary lady.
+        _room: 'throne'
+        _hi: |
+            What do you want?
+        _no_match: |
+            You're not making any sense
+        name: |
+            I'm _Queen_ Ukez _Fantastica_. You've been at my service before.
+            Have you been hit in the head?
+        job: |
+            The _Queen_.
+        fantastica: |
+            My domain, The infinite Emerald Wilderness of Fantastica. You're not
+            supposed to be here, but you're permitted as my _guest_.
+        queen: |
+            And a pretty good one, by my reckoning
+        win: |
+            Okay. You win. $win$
+        key:
+            - |
+                $if/_inventory/skull_key$
+                I already gave it to you
+            - |
+                $default$
+                Oh, that old thing.  Here you go $set/_inventory/skull_key$
+
+    kururu:
+        _description: |
+            A casually dressed young woman idly plays with a hatchet.
+        _room: 'throne'
+        _no_match: |
+            I don't know what you're talking about.
+        name: |
+            Kururu
+        job: |
+            _Prophetess_ to the _Queen_ of Fantastica.
+        queen: |
+            Yeah, Ukez is the queen and there's nothing we can do about that! She's
+            not so bad once you get to know her. Also, she's a good person to
+            chat with if you want to _win_ the game.
+        win: |
+            You should talk to Ukez about that
+        fantastica: |
+            A nice place to raise your kids
+        chest:
+            - |
+                $if/chest/open$
+                You opened it already!
+            - |
+                $default$
+                Did you know it has a _button_ on the back? Also, Ukez has a _key_.
+                It's in the entryway.
+                $set/_world/chest_button$
+    chest:
+        _description: |
+            A locked wooden chest
+        _room: 'entryway'
+        _no_match: |
+            you can't do that with a chest
+        open:
+            - |
+                $if/_me/open$ You opened it already
+            - |
+                $if/_inventory/skull_key$
+                You open the chest with the key.
+                $set/_inventory/candy$ $set/_me/open$
+            - |
+                $if/_world/chest_button$
+                You press the button on the back and open the chest.
+                $set/_inventory/candy$ $set/_me/open$
+            - |
+                $default$
+                It's locked
+
